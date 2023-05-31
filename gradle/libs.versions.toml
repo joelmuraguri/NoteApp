@@ -6,10 +6,11 @@ androidxComposeBom = "2022.10.00"
 junit = "4.13.2"
 androidxTestExtJunit = "1.1.5"
 androidxTestEspresso = "3.5.1"
-gradlePlugin = "8.0.1"
+gradlePlugin = "8.0.2"
 kotlin = "1.8.21"
 appcompat = "1.6.1"
 googlMaterial = "1.9.0"
+composeNavigation = "2.5.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name= "core-ktx", version.ref="androidxCoreKtx" }
@@ -28,7 +29,7 @@ androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling"}
 androidx-compose-ui-test-manifest = {module="androidx.compose.ui:ui-test-manifest"}
 google-material = { group = "com.google.android.material", name = "material", version.ref ="googlMaterial"}
-androidx-appCompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat"}
+androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation"}
 
 # Dependencies of the included build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "gradlePlugin" }

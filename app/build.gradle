@@ -48,10 +48,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core:design"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:editnotes"))
-
     implementation (libs.androidx.core.ktx)
     implementation (libs.bundles.lifecycle)
     implementation (libs.androidx.activity.compose)
@@ -62,6 +58,7 @@ dependencies {
     androidTestImplementation (libs.androidx.test.espresso)
     androidTestImplementation (platform(libs.androidx.compose.bom))
     debugImplementation (libs.bundles.compose.debug)
-    def nav_version = "2.5.3"
-    implementation "androidx.navigation:navigation-compose:$nav_version"
+    implementation (libs.androidx.navigation)
+//    def nav_version = "2.5.3"
+//    implementation "androidx.navigation:navigation-compose:$nav_version"
 }
