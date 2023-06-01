@@ -1,3 +1,23 @@
 <resources>
+
+
     <string name="app_name">NoteApp</string>
+    <string name="home">Home</string>
+    <string name="favourites">Favourites</string>
+    <string name="trash">Trash</string>
+    <string name="tag">Tag</string>
+    <string name="choose_color">Choose Color</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="home_info_description">Home Description</string>
+    <string name="favourites_info_description">Favourite Description</string>
+    <string name="settings_info_description">Settings Description</string>
+    <string name="tag_info_description">Tag Description</string>
+    <string name="menu_info_description">Menu Description</string>
+    <string name="grid_view_info_description">Grid View Description</string>
+    <string name="horizontal_view_info_description">Horizontal View Description</string>
+    <string name="search_info_description">Search Description</string>
+
+
+
 </resources>

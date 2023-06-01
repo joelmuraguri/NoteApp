@@ -59,5 +59,7 @@ dependencies {
     androidTestImplementation (platform(libs.androidx.compose.bom))
     debugImplementation (libs.bundles.compose.debug)
     implementation (libs.androidx.navigation)
+    implementation(libs.androidx.window)
+
 
 }
