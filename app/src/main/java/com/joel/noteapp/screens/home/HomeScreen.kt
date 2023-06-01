@@ -12,19 +12,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import com.joel.noteapp.core.design.composables.AddFAB
 import com.joel.noteapp.core.design.composables.HomeTopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     drawerState: DrawerState,
+    navigateToEdit : () -> Unit,
+    navigateToSearch: () -> Unit
 ){
 
     Log.d("SCREEN", "home screen")
     Scaffold(
         topBar = {
             Log.d("TOOLBAR", "home tool bar")
-            HomeTopBar(drawerState)
+            HomeTopBar(drawerState, navigateToSearch = navigateToSearch)
+        },
+        floatingActionButton = {
+            AddFAB(
+                navigateToEdit = {
+                    navigateToEdit()
+                }
+            )
         }
     ) { paddingValues ->
         Box(
