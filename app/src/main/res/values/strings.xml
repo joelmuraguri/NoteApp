@@ -5,6 +5,8 @@
     <string name="home">Home</string>
     <string name="favourites">Favourites</string>
     <string name="trash">Trash</string>
+    <string name="title">Title</string>
+    <string name="description">Start writing.....</string>
     <string name="tag">Tag</string>
     <string name="choose_color">Choose Color</string>
     <string name="settings">Settings</string>
@@ -17,6 +19,10 @@
     <string name="grid_view_info_description">Grid View Description</string>
     <string name="horizontal_view_info_description">Horizontal View Description</string>
     <string name="search_info_description">Search Description</string>
+    <string name="save_info_description">Save Description</string>
+    <string name="horizontal_more_info_description">Launch BottomSheet Description</string>
+    <string name="pick_color_info_description">Pick Color Description</string>
+    <string name="add_info_description">Add Description</string>
 
 
 

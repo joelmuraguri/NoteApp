@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 fun HomeTopBar(
     drawerState: DrawerState? = null,
     navigationIcon: (@Composable () -> Unit)? = null,
+    navigateToSearch: () -> Unit
 ){
     TopAppBar(
         navigationIcon = {
@@ -26,15 +27,30 @@ fun HomeTopBar(
         title = {},
         actions = {
             GridViewIcon()
-            SearchIcon()
+            SearchIcon(navigateToSearch)
         }
     )
     // TODO ;should have navigation icon, search and should be largetopappbar with image
 
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewNoteTopBar(){
+fun NewNoteTopBar(
+    onPopBackStack : () -> Unit
+){
     //TODO ; should have save/arrow-back, color picker, tag, horizontal more vert{ bottom sheet for reminder, move to trash, add to favourites}
+
+    TopAppBar(
+        navigationIcon = {
+            SaveButton( onPopBackStack)
+        },
+        title = {},
+        actions = {
+            PickColorIcon()
+            TagButton()
+            HorizontalMoreVert()
+        }
+    )
 }
 
 @Composable
@@ -47,9 +63,3 @@ fun SearchTopBar(){
     //TODO , should have arrow-back, filter icon, searchfield with icon,
 
 }
-
-data class AppBarAction(
-    @DrawableRes val icon: Int,
-    @StringRes val description: Int,
-    val onClick: () -> Unit
-)

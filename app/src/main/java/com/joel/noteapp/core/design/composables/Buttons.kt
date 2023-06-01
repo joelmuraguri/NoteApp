@@ -1,19 +1,25 @@
 package com.joel.noteapp.core.design.composables
 
 import android.util.Log
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.joel.noteapp.R
 import com.joel.noteapp.core.design.Icon.ImageVectorIcon
 import com.joel.noteapp.core.design.NAIcons
@@ -21,8 +27,13 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun AddFAB(){
+fun AddFAB(
+    navigateToEdit : () -> Unit
+){
     // TODO ; add/note icon or with text
+    FloatingActionButton(onClick = { navigateToEdit() }) {
+        Icon(imageVector = Icons.Filled.Add, contentDescription = stringResource(id = R.string.add_info_description))
+    }
 }
 
 @Composable
@@ -36,19 +47,54 @@ fun ArrowBackNav(){
 }
 
 @Composable
-fun SaveButton(){
-    // TODO ; tick icon
+fun SaveButton(
+    onPopBackStack : () -> Unit
+){
+    IconButton(onClick = { onPopBackStack() }) {
+        Icon(
+            painter = painterResource(id = R.drawable.baseline_check_24),
+            contentDescription = stringResource(id = R.string.save_info_description),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+    }
 }
 
 @Composable
 fun TagButton(){
-    //TODO ; should have tag icon
+    IconButton(onClick = { /*TODO*/ }) {
+        Icon(
+            painter = painterResource(id = R.drawable.tag_icon),
+            contentDescription = stringResource(id = R.string.tag_info_description),
+            tint = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier
+                .size(25.dp)
+        )
+    }
 }
 
 @Composable
-fun HorizontalMoreVert(){
-    //TODO ; should have HorizontalMoreVert icon
+fun PickColorIcon(){
+    IconButton(onClick = { /*TODO*/ }) {
+        Icon(
+            painter = painterResource(id = R.drawable.baseline_color_lens_24),
+            contentDescription = stringResource(id = R.string.pick_color_info_description),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+    }
 }
+@Composable
+
+fun HorizontalMoreVert(){
+    IconButton(onClick = { /*TODO*/ }) {
+        Icon(
+            painter = painterResource(id = R.drawable.baseline_more_horiz_24),
+            contentDescription = stringResource(id = R.string.horizontal_more_info_description),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -81,8 +127,10 @@ fun GridViewIcon(){
 }
 
 @Composable
-fun SearchIcon(){
-    IconButton(onClick = { /*TODO*/ }) {
+fun SearchIcon(
+    navigateToSearch: () -> Unit
+){
+    IconButton(onClick = { navigateToSearch() }) {
         Icon(
             imageVector = Icons.Filled.Search,
             contentDescription = stringResource(id = R.string.settings_info_description),
