@@ -11,6 +11,8 @@
     <string name="choose_color">Choose Color</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
+    <string name="sad_face_icon">Sad Face Icon</string>
+    <string name="delete_icon">DeleteIcon</string>
     <string name="home_info_description">Home Description</string>
     <string name="favourites_info_description">Favourite Description</string>
     <string name="settings_info_description">Settings Description</string>
@@ -23,6 +25,8 @@
     <string name="horizontal_more_info_description">Launch BottomSheet Description</string>
     <string name="pick_color_info_description">Pick Color Description</string>
     <string name="add_info_description">Add Description</string>
+    <string name="arrowBack_info_description">ArrowBack Description</string>
+    <string name="no_tasks_found">No Tasks Found</string>
 
 
 
