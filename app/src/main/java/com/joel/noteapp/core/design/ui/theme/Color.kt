@@ -1,4 +1,4 @@
-package com.joel.noteapp.core.ui.theme
+package com.joel.noteapp.core.design.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

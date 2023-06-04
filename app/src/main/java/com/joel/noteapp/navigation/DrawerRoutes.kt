@@ -19,15 +19,7 @@ fun NavGraphBuilder.drawerRouteGraph(drawerState: DrawerState, navController: Na
 
     navigation(startDestination = DrawerNavOption.HomeScreen.name, route = NavRoutes.MainRoute.name ){
         composable(route = DrawerNavOption.HomeScreen.name){
-            HomeScreen(
-                drawerState,
-                navigateToEdit = {
-                    navController.navigate(AppNavOptions.EditScreen.name)
-                },
-                navigateToSearch = {
-                    navController.navigate(AppNavOptions.SearchScreen.name)
-                }
-            )
+
         }
         composable(route = DrawerNavOption.FavouriteScreen.name){
             FavouriteScreen()
@@ -35,7 +27,6 @@ fun NavGraphBuilder.drawerRouteGraph(drawerState: DrawerState, navController: Na
         composable(route = DrawerNavOption.SettingsScreen.name){
             SettingsScreen()
         }
-
         composable(route = DrawerNavOption.TagScreen.name){
             Toast.makeText(context, "NOT YET CONFIGURED", Toast.LENGTH_SHORT).show()
         }
@@ -45,13 +36,16 @@ fun NavGraphBuilder.drawerRouteGraph(drawerState: DrawerState, navController: Na
 fun NavGraphBuilder.appNavOptionsGraph(navController: NavHostController){
     navigation(startDestination = AppNavOptions.EditScreen.name, route = NavRoutes.AppNavOptionsRoute.name){
         composable(route = AppNavOptions.EditScreen.name){
-            EditScreen(onPopBackStack = {navController.popBackStack()})
+//            EditScreen(
+//                onPopBackStack = {navController.popBackStack()}, navigateToHomeScreen = {})
         }
         composable(route = AppNavOptions.SearchScreen.name){
             SearchScreen()
         }
     }
 }
+
+
 
 enum class AppNavOptions{
     SearchScreen,
