@@ -1,28 +1,23 @@
 package com.joel.noteapp.core.design.composables
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.compose.material3.DrawerState
+import android.content.res.Configuration
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import com.joel.noteapp.core.design.ui.theme.NoteAppTheme
+import com.joel.noteapp.core.utils.Actions
+import com.joel.noteapp.data.models.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeTopBar(
-    drawerState: DrawerState? = null,
-    navigationIcon: (@Composable () -> Unit)? = null,
-    navigateToSearch: () -> Unit
+    navigateToSearch: () -> Unit,
+    openDrawer : () -> Unit,
 ){
     TopAppBar(
         navigationIcon = {
-            if (drawerState != null && navigationIcon == null){
-                DrawerIcon(drawerState = drawerState)
-            } else {
-                navigationIcon?.invoke()
-            }
+            DrawerMenuButton(openDrawer)
         },
         title = {},
         actions = {
@@ -33,16 +28,51 @@ fun HomeTopBar(
     // TODO ;should have navigation icon, search and should be largetopappbar with image
 
 }
+
+@Composable
+fun EditScreenAppBar(
+    note: Note?,
+    navigateToHomeScreen: (Actions) -> Unit,
+    onPopBackStack : () -> Unit
+) {
+    if (note == null) {
+        NewNoteTopBar(navigateToHomeScreen = navigateToHomeScreen, onPopBackStack = onPopBackStack)
+    } else {
+        ExistingNoteTopBar(
+            navigateToHomeScreen = navigateToHomeScreen
+        )
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewNoteTopBar(
+    navigateToHomeScreen : (Actions) -> Unit,
     onPopBackStack : () -> Unit
+
 ){
     //TODO ; should have save/arrow-back, color picker, tag, horizontal more vert{ bottom sheet for reminder, move to trash, add to favourites}
 
     TopAppBar(
         navigationIcon = {
-            SaveButton( onPopBackStack)
+            SaveButton( navigateToHomeScreen, onPopBackStack )
+        },
+        title = {},
+        actions = {
+            PickColorIcon()
+            TagButton()
+            HorizontalMoreVert()
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ExistingNoteTopBar(navigateToHomeScreen : (Actions) -> Unit){
+    //TODO ; should have arrow-back, color picker, tag, horizontal more vert{ bottom sheet for reminder, move to trash, add to favourites}
+    TopAppBar(
+        navigationIcon = {
+            ArrowBackNav(navigateToHomeScreen)
         },
         title = {},
         actions = {
@@ -54,12 +84,44 @@ fun NewNoteTopBar(
 }
 
 @Composable
-fun ExistingNoteTopBar(){
-    //TODO ; should have arrow-back, color picker, tag, horizontal more vert{ bottom sheet for reminder, move to trash, add to favourites}
-}
-
-@Composable
 fun SearchTopBar(){
     //TODO , should have arrow-back, filter icon, searchfield with icon,
 
+}
+
+
+@Preview("New NoteTop Bar")
+@Preview("New NoteTop Bar(dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewNewTopBar() {
+    NoteAppTheme {
+        NewNoteTopBar(
+            onPopBackStack = {},
+            navigateToHomeScreen = {}
+        )
+    }
+}
+
+@Preview("ExistingTopBar contents")
+@Preview("ExistingTopBar contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewExistingTopBar() {
+    NoteAppTheme {
+        ExistingNoteTopBar(){
+
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview("HomeTopBar contents")
+@Preview("HomeTopBar contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewHomeTopBar() {
+    NoteAppTheme {
+        HomeTopBar(
+            navigateToSearch = {},
+            openDrawer = {}
+        )
+    }
 }

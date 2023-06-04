@@ -15,23 +15,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.joel.noteapp.R
-import com.joel.noteapp.core.design.Icon.ImageVectorIcon
 import com.joel.noteapp.core.design.NAIcons
+import com.joel.noteapp.core.utils.Actions
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun AddFAB(
-    navigateToEdit : () -> Unit
+    onFabClicked: (taskId: Int) -> Unit
 ){
     // TODO ; add/note icon or with text
-    FloatingActionButton(onClick = { navigateToEdit() }) {
+    FloatingActionButton(onClick = { onFabClicked(-1) }) {
         Icon(imageVector = Icons.Filled.Add, contentDescription = stringResource(id = R.string.add_info_description))
     }
 }
@@ -42,15 +40,36 @@ fun EditFAB(){
 }
 
 @Composable
-fun ArrowBackNav(){
-    // TODO ; arrow-back icon
+fun ArrowBackNav(
+    navigateToHomeScreen : (Actions) -> Unit
+){
+    IconButton(onClick = { navigateToHomeScreen }) {
+        Icon(
+            imageVector = NAIcons.arrowBack,
+            contentDescription = stringResource(id = R.string.arrowBack_info_description),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+@Composable
+fun DrawerMenuButton(
+    openDrawer : () -> Unit
+){
+    IconButton(onClick = { openDrawer }) {
+        Icon(
+            Icons.Rounded.Menu,
+            tint = MaterialTheme.colorScheme.onBackground,
+            contentDescription = stringResource(id = R.string.menu_info_description)
+        )
+    }
 }
 
 @Composable
 fun SaveButton(
+    navigateToHomeScreen : (Actions) -> Unit,
     onPopBackStack : () -> Unit
 ){
-    IconButton(onClick = { onPopBackStack() }) {
+    IconButton(onClick = { navigateToHomeScreen }) {
         Icon(
             painter = painterResource(id = R.drawable.baseline_check_24),
             contentDescription = stringResource(id = R.string.save_info_description),

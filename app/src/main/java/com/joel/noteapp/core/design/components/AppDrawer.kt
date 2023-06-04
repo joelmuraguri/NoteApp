@@ -12,12 +12,16 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
+import androidx.compose.material3.ModalNavigationDrawer
+import androidx.compose.material3.NavigationDrawerItem
+import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,18 +39,77 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
-import com.joel.noteapp.core.ui.theme.NoteAppTheme
-import com.joel.noteapp.navigation.DrawerNavOption
-import com.joel.noteapp.R
-import kotlinx.coroutines.launch
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.rememberDrawerState
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.joel.noteapp.R
+import com.joel.noteapp.core.design.ui.theme.NoteAppTheme
+import com.joel.noteapp.core.utils.Actions
+import com.joel.noteapp.navigation.DrawerNavOption
 import com.joel.noteapp.navigation.NavRoutes
+import com.joel.noteapp.screens.favourite.FAVOURITE_ROUTE
+import com.joel.noteapp.screens.home.HOME_SCREEN
+import com.joel.noteapp.screens.settings.SETTINGS_ROUTE
+import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AppNavDrawer(
+    currentRoute: String,
+    navigateToHome: (Actions) -> Unit,
+    navigateToFavourites: () -> Unit,
+    navigateToSettings: () -> Unit,
+    navigateToTags: () -> Unit,
+    closeDrawer: () -> Unit,
+    modifier: Modifier = Modifier,
+){
+
+    ModalDrawerSheet(modifier) {
+        NavigationDrawerItem(
+            label = { Text(stringResource(id = R.string.home)) },
+            icon = { Icon(painter = painterResource(id = R.drawable.baseline_home_24), contentDescription = stringResource(id = R.string.home_info_description)) },
+            selected = currentRoute == HOME_SCREEN,
+            onClick = { navigateToHome; closeDrawer() },
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(id = R.string.favourites)) },
+            icon = { Icon(painter = painterResource(id = R.drawable.baseline_favorite_24), contentDescription = stringResource(id = R.string.favourites_info_description)) },
+            selected = currentRoute == FAVOURITE_ROUTE,
+            onClick = { navigateToFavourites(); closeDrawer() },
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(id = R.string.tag)) },
+            icon = { Icon(painter = painterResource(id = R.drawable.tag_icon), contentDescription = stringResource(id = R.string.tag_info_description)) },
+            selected = currentRoute == "",
+            onClick = { navigateToTags() },
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding).size(25.dp)
+
+        )
+        NavigationDrawerItem(
+            label = { Text(stringResource(id = R.string.settings)) },
+            icon = { Icon(painter = painterResource(id = R.drawable.baseline_settings_24), contentDescription = stringResource(id = R.string.settings_info_description)) },
+            selected = currentRoute == SETTINGS_ROUTE,
+            onClick = { navigateToSettings(); closeDrawer() },
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
+        )
+    }
+}
+
+@Preview("Drawer contents")
+@Preview("Drawer contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun PreviewAppNavDrawer() {
+    NoteAppTheme() {
+        AppNavDrawer(
+            currentRoute = HOME_SCREEN,
+            navigateToHome = {},
+            navigateToSettings = {},
+            closeDrawer = { },
+            navigateToFavourites = {},
+            navigateToTags = {}
+        )
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -228,14 +291,14 @@ data class AppDrawerItemInfo<T>(
     @StringRes val descriptionId: Int
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview("Drawer contents")
-@Preview("Drawer contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun PreviewAppDrawer() {
-    val navController = rememberNavController()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    NoteAppTheme {
-        AppDrawer(content = {}, navController = navController, drawerState = drawerState)
-    }
-}
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Preview("Drawer contents")
+//@Preview("Drawer contents (dark)", uiMode = Configuration.UI_MODE_NIGHT_YES)
+//@Composable
+//fun PreviewAppDrawer() {
+//    val navController = rememberNavController()
+//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//    NoteAppTheme {
+//        AppDrawer(content = {}, navController = navController, drawerState = drawerState)
+//    }
+//}
