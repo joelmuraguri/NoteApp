@@ -106,4 +106,17 @@ class HomeViewModel @Inject constructor(
         action = newAction
     }
 
+    fun updateTaskFields(selectedNote: Note?) {
+        if (selectedNote != null) {
+            id = selectedNote.id
+            title = selectedNote.title
+            contents = selectedNote.content
+        } else {
+            id = 0
+            title = ""
+            contents = ""
+        }
+    }
+
+
 }

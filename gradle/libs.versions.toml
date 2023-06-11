@@ -12,6 +12,9 @@ appcompat = "1.6.1"
 googlMaterial = "1.9.0"
 composeNavigation = "2.5.1"
 androidx-window = "1.1.0-rc01"
+hilt = "2.44.2"
+hiltExt = "1.0.0"
+androidxHiltNavigationCompose = "1.0.0"
 
 
 [libraries]
@@ -33,6 +36,12 @@ androidx-compose-ui-test-manifest = {module="androidx.compose.ui:ui-test-manifes
 google-material = { group = "com.google.android.material", name = "material", version.ref ="googlMaterial"}
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation"}
 androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
 
 
 # Dependencies of the included build-logic
@@ -45,6 +54,8 @@ android-application = {id = "com.android.application", version.ref="gradlePlugin
 android-library = {id = "com.android.library", version.ref="gradlePlugin"}
 kotlin-android = {id = "org.jetbrains.kotlin.android", version.ref = "kotlin"}
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
 
 
 [bundles]

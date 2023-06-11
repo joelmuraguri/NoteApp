@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         val homeViewModel: HomeViewModel by viewModels()
         val editViewModel: EditViewModel by viewModels()
 
@@ -33,9 +34,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NoteApp(
-                        homeViewModel, editViewModel
-                    )
+//                    NoteApp(
+//                        homeViewModel, editViewModel
+//                    )
+                    NoteAppSetup(homeViewModel = homeViewModel, editViewModel = editViewModel)
                 }
             }
         }

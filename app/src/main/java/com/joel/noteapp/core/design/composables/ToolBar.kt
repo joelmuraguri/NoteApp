@@ -2,9 +2,12 @@ package com.joel.noteapp.core.design.composables
 
 import android.content.res.Configuration
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.joel.noteapp.R
 import com.joel.noteapp.core.design.ui.theme.NoteAppTheme
 import com.joel.noteapp.core.utils.Actions
 import com.joel.noteapp.data.models.Note
@@ -13,20 +16,20 @@ import com.joel.noteapp.data.models.Note
 @Composable
 fun HomeTopBar(
     navigateToSearch: () -> Unit,
-    openDrawer : () -> Unit,
 ){
     TopAppBar(
-        navigationIcon = {
-            DrawerMenuButton(openDrawer)
-        },
-        title = {},
+        title = {
+            Text(
+                text = stringResource(id = R.string.home
+                )
+            )
+                },
         actions = {
             GridViewIcon()
             SearchIcon(navigateToSearch)
         }
     )
-    // TODO ;should have navigation icon, search and should be largetopappbar with image
-
+    // TODO ;should have navigation icon, search and should be large-top-appbar with image
 }
 
 @Composable
@@ -85,7 +88,7 @@ fun ExistingNoteTopBar(navigateToHomeScreen : (Actions) -> Unit){
 
 @Composable
 fun SearchTopBar(){
-    //TODO , should have arrow-back, filter icon, searchfield with icon,
+    //TODO , should have arrow-back, filter icon, search-field with icon,
 
 }
 
@@ -121,7 +124,6 @@ fun PreviewHomeTopBar() {
     NoteAppTheme {
         HomeTopBar(
             navigateToSearch = {},
-            openDrawer = {}
         )
     }
 }

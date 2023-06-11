@@ -1,29 +1,22 @@
 package com.joel.noteapp.screens.home
 
-import android.util.Log
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.sp
-import com.joel.noteapp.core.design.components.NoteItem
+import com.joel.noteapp.core.design.components.HomeContents
 import com.joel.noteapp.core.design.composables.AddFAB
 import com.joel.noteapp.core.design.composables.HomeTopBar
 import com.joel.noteapp.core.utils.Actions
+import com.joel.noteapp.data.models.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,11 +25,9 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     action: Actions,
     navigateToEditScreen: (taskId: Int) -> Unit,
-    openDrawer : () -> Unit
-){
+    ){
 
-    val notes = viewModel.notes.collectAsState(initial = emptyList())
-
+    val allNotes by viewModel.allNotes.collectAsState()
 
     LaunchedEffect(key1 = action) {
         viewModel.handleDatabaseActions(actions = action)
@@ -56,30 +47,30 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             HomeTopBar(
-                openDrawer = openDrawer,
-                navigateToSearch = navigateToSearch)
+                navigateToSearch = navigateToSearch
+            )
         },
         floatingActionButton = {
             AddFAB(
                 onFabClicked = navigateToEditScreen
             )
         },
-        snackbarHost = { snackBarHostState }
-    ) { paddingValues ->
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-        ){
-            items(notes.value){
-               NoteItem(
-                   navigateToEditScreen = navigateToEditScreen,
-                   note = it
-               )
-            }
+        content = { paddingValues ->
+            HomeContents(
+                allNotes = allNotes,
+                navigateToEditScreen = navigateToEditScreen,
+                onSwipeToDelete = { action, note ->
+                    viewModel.updateAction(newAction = action)
+                    viewModel.updateTaskFields(selectedNote = note)
+                    snackBarHostState.currentSnackbarData?.dismiss()
+                },
+                modifier = Modifier.padding(paddingValues)
+            )
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHostState)
         }
-    }
+    )
 }
 
 @Composable

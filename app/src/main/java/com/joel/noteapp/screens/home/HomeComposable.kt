@@ -1,7 +1,5 @@
 package com.joel.noteapp.screens.home
 
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +20,6 @@ fun NavGraphBuilder.homeComposable(
     viewModel: HomeViewModel,
     navigateToEditScreen: (taskId: Int) -> Unit,
     navigateToSearchScreen: () -> Unit,
-    openDrawer : () -> Unit
     ){
 
     composable(
@@ -50,7 +47,6 @@ fun NavGraphBuilder.homeComposable(
             viewModel = viewModel,
             action = databaseActions,
             navigateToEditScreen = navigateToEditScreen,
-            openDrawer = openDrawer
         )
     }
 }

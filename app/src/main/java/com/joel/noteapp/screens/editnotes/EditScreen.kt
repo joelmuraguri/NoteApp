@@ -15,8 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.joel.noteapp.core.design.composables.EditScreenAppBar
-import com.joel.noteapp.core.design.composables.NewNoteTopBar
-import com.joel.noteapp.core.design.composables.NoteDescriptionField
+import com.joel.noteapp.core.design.composables.NoteContentsField
 import com.joel.noteapp.core.design.composables.TitleField
 import com.joel.noteapp.core.design.ui.theme.NoteAppTheme
 import com.joel.noteapp.core.utils.Actions
@@ -66,16 +65,15 @@ fun EditScreen(
                 .fillMaxSize()
         ) {
             TitleField(
-                value = title,
-                onNewValue = {
+                title = title,
+                onTitleValue = {
                     viewModel.updateTitle(title)
                 })
-            NoteDescriptionField(
-                value = contents,
-                onNewValue = {
+            NoteContentsField(
+                contents = contents,
+                onContentsValue = {
                     viewModel.updateContents(contents)
                 })
-
         }
     }
 }
@@ -93,9 +91,10 @@ fun displayToast(context: Context) {
 @Composable
 fun PreviewEditScreen() {
 
+
     NoteAppTheme {
-//        EditScreen(){
-//
-//        }
+//        EditScreen(
+//            viewModel =
+//        )
     }
 }

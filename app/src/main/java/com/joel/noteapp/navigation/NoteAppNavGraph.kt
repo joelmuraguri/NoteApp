@@ -23,14 +23,12 @@ fun NoteAppNavGraph(
     navigateToEditScreen : (noteId : Int) -> Unit,
     navigateToSearchScreen : () -> Unit,
     navigateToHomeScreen : (Actions) -> Unit,
-    openDrawer : () -> Unit
 ){
 
     NavHost(navController = navController, startDestination = HOME_SCREEN){
         homeComposable(
             viewModel = homeViewModel,
             navigateToEditScreen = navigateToEditScreen,
-            openDrawer = openDrawer,
             navigateToSearchScreen = navigateToSearchScreen
         )
         editComposable(

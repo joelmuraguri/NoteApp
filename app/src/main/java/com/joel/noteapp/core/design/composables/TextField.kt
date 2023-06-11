@@ -9,7 +9,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldColors
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,13 +26,13 @@ fun SearchField(){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TitleField(
-    value : String,
-    onNewValue : (String) -> Unit
+    title : String,
+    onTitleValue : (String) -> Unit
 ){
     //TODO ; should have placeholder text, singline
     OutlinedTextField(
-        value = value,
-        onValueChange = {onNewValue(it)},
+        value = title,
+        onValueChange = {onTitleValue(it)},
         singleLine = true,
         modifier = Modifier
             .padding(2.dp)
@@ -55,14 +54,14 @@ fun TitleField(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteDescriptionField(
-    value : String,
-    onNewValue : (String) -> Unit
+fun NoteContentsField(
+    contents : String,
+    onContentsValue : (String) -> Unit
 ){
     //TODO ; should have placeholder text, fills remaining height,vertical scroll will be handy
     OutlinedTextField(
-        value = value,
-        onValueChange = {onNewValue(it)},
+        value = contents,
+        onValueChange = {onContentsValue(it)},
         modifier = Modifier
             .padding(2.dp)
             .fillMaxSize()

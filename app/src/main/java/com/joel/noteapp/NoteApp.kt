@@ -20,63 +20,79 @@ import com.joel.noteapp.screens.home.HOME_SCREEN
 import com.joel.noteapp.screens.home.HomeViewModel
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NoteApp(
+fun NoteAppSetup(
     homeViewModel: HomeViewModel,
-    editViewModel: EditViewModel
+    editViewModel: EditViewModel,
 ){
-
-    val navController = rememberNavController()
-    val navigationActions = remember(navController) {
-            NoteAppNavigation(navController)
-    }
 
     val context = LocalContext.current
 
-    val coroutineScope = rememberCoroutineScope()
+    val navController = rememberNavController()
 
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route ?: HOME_SCREEN
-
-    ModalNavigationDrawer(
-        drawerContent = {
-            AppNavDrawer(
-                currentRoute = currentRoute,
-                navigateToHome = navigationActions.navigateToHome,
-                navigateToFavourites = navigationActions.navigateToFavourites,
-                navigateToSettings = { /*TODO*/ },
-                navigateToTags = {Toast.makeText(context,"NO TAGS", Toast.LENGTH_SHORT).show() },
-                closeDrawer = { coroutineScope.launch { drawerState.close() } })
-        },
-        drawerState = drawerState
-    ) {
-
-        NoteAppNavGraph(
-            navController = navController,
-            homeViewModel = homeViewModel,
-            editViewModel = editViewModel,
-            context = context,
-            navigateToEditScreen = navigationActions.navigateToEdit,
-            navigateToSearchScreen = navigationActions.navigateToSearch,
-            navigateToHomeScreen = navigationActions.navigateToHome,
-            openDrawer = { coroutineScope.launch { drawerState.open() } }
-        )
+    val navigationActions = remember {
+        NoteAppNavigation(navController)
     }
 
+
+    NoteAppNavGraph(
+        navController = navController,
+        homeViewModel = homeViewModel,
+        editViewModel = editViewModel,
+        context = context,
+        navigateToEditScreen = navigationActions.navigateToEdit,
+        navigateToSearchScreen = navigationActions.navigateToSearch,
+        navigateToHomeScreen = navigationActions.navigateToHome
+    )
+
+
+}
+
+//@OptIn(ExperimentalMaterial3Api::class)
+//@Composable
+//fun NoteApp(
+//    homeViewModel: HomeViewModel,
+//    editViewModel: EditViewModel
+//){
+//
+//    val navController = rememberNavController()
+//    val navigationActions = remember(navController) {
+//            NoteAppNavigation(navController)
+//    }
+//
 //    val context = LocalContext.current
 //
-//    AppDrawer(
-//        navController = navController,
+//    val coroutineScope = rememberCoroutineScope()
+//
+//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//
+//    val navBackStackEntry by navController.currentBackStackEntryAsState()
+//    val currentRoute = navBackStackEntry?.destination?.route ?: HOME_SCREEN
+//
+//    ModalNavigationDrawer(
+//        drawerContent = {
+//            AppNavDrawer(
+//                currentRoute = currentRoute,
+//                navigateToHome = navigationActions.navigateToHome,
+//                navigateToFavourites = navigationActions.navigateToFavourites,
+//                navigateToSettings = { /*TODO*/ },
+//                navigateToTags = {Toast.makeText(context,"NO TAGS", Toast.LENGTH_SHORT).show() },
+//                closeDrawer = { coroutineScope.launch { drawerState.close() } })
+//        },
 //        drawerState = drawerState
 //    ) {
-//        NavHost(navController = navController, startDestination = NavRoutes.MainRoute.name){
 //
-//            drawerRouteGraph(drawerState, navController, context)
-//            appNavOptionsGraph(navController)
-//        }
+//        NoteAppNavGraph(
+//            navController = navController,
+//            homeViewModel = homeViewModel,
+//            editViewModel = editViewModel,
+//            context = context,
+//            navigateToEditScreen = navigationActions.navigateToEdit,
+//            navigateToSearchScreen = navigationActions.navigateToSearch,
+//            navigateToHomeScreen = navigationActions.navigateToHome,
+//            openDrawer = { coroutineScope.launch { drawerState.open() } }
+//        )
 //    }
-}
+//
+//}
 

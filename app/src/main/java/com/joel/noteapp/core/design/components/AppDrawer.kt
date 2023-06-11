@@ -79,10 +79,10 @@ fun AppNavDrawer(
         )
         NavigationDrawerItem(
             label = { Text(stringResource(id = R.string.tag)) },
-            icon = { Icon(painter = painterResource(id = R.drawable.tag_icon), contentDescription = stringResource(id = R.string.tag_info_description)) },
+            icon = { Icon(painter = painterResource(id = R.drawable.baseline_tag_24), contentDescription = stringResource(id = R.string.tag_info_description)) },
             selected = currentRoute == "",
             onClick = { navigateToTags() },
-            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding).size(25.dp)
+            modifier = Modifier.padding(NavigationDrawerItemDefaults.ItemPadding)
 
         )
         NavigationDrawerItem(
