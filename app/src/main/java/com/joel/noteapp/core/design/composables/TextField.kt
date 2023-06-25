@@ -18,10 +18,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.joel.noteapp.R
 
-@Composable
-fun SearchField(){
-    // TODO ;should have icon and placeholder text
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,7 +25,7 @@ fun TitleField(
     title : String,
     onTitleValue : (String) -> Unit
 ){
-    //TODO ; should have placeholder text, singline
+    //TODO ; should have placeholder text, sing-line
     OutlinedTextField(
         value = title,
         onValueChange = {onTitleValue(it)},

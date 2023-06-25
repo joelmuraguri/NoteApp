@@ -1,89 +1,52 @@
 package com.joel.noteapp.screens.editnotes
 
-import android.content.Context
 import android.content.res.Configuration
-import android.widget.Toast
-import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.joel.noteapp.core.design.composables.EditScreenAppBar
-import com.joel.noteapp.core.design.composables.NoteContentsField
-import com.joel.noteapp.core.design.composables.TitleField
+import androidx.compose.ui.unit.sp
 import com.joel.noteapp.core.design.ui.theme.NoteAppTheme
-import com.joel.noteapp.core.utils.Actions
-import com.joel.noteapp.data.models.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditScreen(
-    viewModel: EditViewModel,
-    navigateToHomeScreen : (Actions) -> Unit,
-    note : Note?,
-    context: Context,
     onPopBackStack : () -> Unit
 ){
 
-    val title : String = viewModel.title
-    val contents : String = viewModel.contents
-
-    BackHandler {
-        navigateToHomeScreen(Actions.NO_ACTION)
-    }
-
     Scaffold(
         topBar = {
-            EditScreenAppBar(
-                note = note,
-                navigateToHomeScreen = { actions ->
-                    if (actions == Actions.NO_ACTION){
-                        navigateToHomeScreen(actions)
-                    } else{
-                        if (viewModel.validateFields()){
-                            navigateToHomeScreen(actions)
-                        } else{
-                            displayToast(context)
-                        }
+            TopAppBar(
+                title = {},
+                navigationIcon = {
+                    IconButton(onClick = { onPopBackStack() }) {
+                        Icons.Filled.ArrowBack
                     }
-                },
-                onPopBackStack = onPopBackStack
+                }
             )
+
         }
     ) { paddingValues ->
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
+
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
-                .padding(paddingValues)
                 .fillMaxSize()
+                .padding(paddingValues)
         ) {
-            TitleField(
-                title = title,
-                onTitleValue = {
-                    viewModel.updateTitle(title)
-                })
-            NoteContentsField(
-                contents = contents,
-                onContentsValue = {
-                    viewModel.updateContents(contents)
-                })
+            Text(text = "EDIT", fontSize = 28.sp)
         }
     }
-}
-
-fun displayToast(context: Context) {
-    Toast.makeText(
-        context,
-        "Fields Empty.",
-        Toast.LENGTH_SHORT
-    ).show()
 }
 
 @Preview("Edit Screen contents")

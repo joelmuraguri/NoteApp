@@ -9,8 +9,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.joel.noteapp.R
 import com.joel.noteapp.core.design.ui.theme.NoteAppTheme
-import com.joel.noteapp.core.utils.Actions
-import com.joel.noteapp.data.models.Note
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,59 +30,7 @@ fun HomeTopBar(
     // TODO ;should have navigation icon, search and should be large-top-appbar with image
 }
 
-@Composable
-fun EditScreenAppBar(
-    note: Note?,
-    navigateToHomeScreen: (Actions) -> Unit,
-    onPopBackStack : () -> Unit
-) {
-    if (note == null) {
-        NewNoteTopBar(navigateToHomeScreen = navigateToHomeScreen, onPopBackStack = onPopBackStack)
-    } else {
-        ExistingNoteTopBar(
-            navigateToHomeScreen = navigateToHomeScreen
-        )
-    }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun NewNoteTopBar(
-    navigateToHomeScreen : (Actions) -> Unit,
-    onPopBackStack : () -> Unit
-
-){
-    //TODO ; should have save/arrow-back, color picker, tag, horizontal more vert{ bottom sheet for reminder, move to trash, add to favourites}
-
-    TopAppBar(
-        navigationIcon = {
-            SaveButton( navigateToHomeScreen, onPopBackStack )
-        },
-        title = {},
-        actions = {
-            PickColorIcon()
-            TagButton()
-            HorizontalMoreVert()
-        }
-    )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ExistingNoteTopBar(navigateToHomeScreen : (Actions) -> Unit){
-    //TODO ; should have arrow-back, color picker, tag, horizontal more vert{ bottom sheet for reminder, move to trash, add to favourites}
-    TopAppBar(
-        navigationIcon = {
-            ArrowBackNav(navigateToHomeScreen)
-        },
-        title = {},
-        actions = {
-            PickColorIcon()
-            TagButton()
-            HorizontalMoreVert()
-        }
-    )
-}
 
 @Composable
 fun SearchTopBar(){
@@ -98,10 +44,7 @@ fun SearchTopBar(){
 @Composable
 fun PreviewNewTopBar() {
     NoteAppTheme {
-        NewNoteTopBar(
-            onPopBackStack = {},
-            navigateToHomeScreen = {}
-        )
+
     }
 }
 
@@ -110,9 +53,7 @@ fun PreviewNewTopBar() {
 @Composable
 fun PreviewExistingTopBar() {
     NoteAppTheme {
-        ExistingNoteTopBar(){
 
-        }
     }
 }
 
