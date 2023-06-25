@@ -10,6 +10,8 @@ class HomeViewModel @Inject constructor(
     private val repository: NotesRepository
 ) : ViewModel() {
 
+    val notes = repository.getAllNotes()
+
 
 
 }

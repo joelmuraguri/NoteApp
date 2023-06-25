@@ -20,7 +20,7 @@ fun NoteAppSetup() {
         navController = navController,
         onAdd = navigationActions.navigateToEditScreen,
         navigateToSearchScreen = navigationActions.navigateToSearch,
-        onPopBackStack = navigationActions.navigateToHomeScreen
+        navigateToHome = navigationActions.navigateToHomeScreen
     )
 }
 

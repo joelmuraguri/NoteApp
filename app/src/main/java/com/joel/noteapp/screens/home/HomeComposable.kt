@@ -8,7 +8,8 @@ const val HOME_SCREEN = "home"
 
 fun NavGraphBuilder.homeComposable(
     onAdd : () -> Unit,
-    navigateToSearch : () -> Unit
+    navigateToSearch : () -> Unit,
+    homeViewModel: HomeViewModel
 ) {
 
     composable(
@@ -16,7 +17,8 @@ fun NavGraphBuilder.homeComposable(
     ){
         HomeScreen(
             onAdd = onAdd,
-            navigateToSearch = navigateToSearch
+            navigateToSearch = navigateToSearch,
+            homeViewModel = homeViewModel
         )
     }
 }
