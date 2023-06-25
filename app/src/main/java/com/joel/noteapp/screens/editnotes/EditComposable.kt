@@ -6,13 +6,14 @@ import androidx.navigation.compose.composable
 const val EDIT_SCREEN = "edit"
 
 fun NavGraphBuilder.editComposable(
-    onPopBackStack : () -> Unit
+    navigateToHome : () -> Unit,
+    editViewModel: EditViewModel
 ){
 
     composable(
         route = EDIT_SCREEN
     ){
-        EditScreen(onPopBackStack = onPopBackStack)
+        EditScreen(navigateToHome = navigateToHome, editViewModel = editViewModel)
     }
 
 }

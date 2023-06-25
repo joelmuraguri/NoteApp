@@ -87,3 +87,27 @@ fun SearchIcon(
         )
     }
 }
+@Composable
+fun SaveButton(
+    navigateToHome: () -> Unit
+){
+    IconButton(onClick = { navigateToHome() }) {
+        Icon(
+            painter = painterResource(id = R.drawable.baseline_check_24),
+            contentDescription = stringResource(id = R.string.settings_info_description),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
+@Composable
+fun NavigateBack(
+    navigateToHome: () -> Unit
+){
+    IconButton(onClick = { navigateToHome() }) {
+        Icon(
+            painter = painterResource(id = com.google.android.material.R.drawable.ic_arrow_back_black_24),
+            contentDescription = stringResource(id = R.string.settings_info_description),
+            tint = MaterialTheme.colorScheme.onBackground
+        )
+    }
+}
